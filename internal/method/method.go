@@ -258,6 +258,24 @@ func NewGetDeletionPolicy(receiver, runtime string) New {
 	}
 }
 
+func NewSetReconciliationPolicy(receiver, runtime string) New {
+	return func(f *jen.File, o types.Object) {
+		f.Commentf("SetReconciliationPolicy of this %s.", o.Name())
+		f.Func().Params(jen.Id(receiver).Op("*").Id(o.Name())).Id("SetReconciliationPolicy").Params(jen.Id("r").Op("*").Qual(runtime, "ReconciliationPolicy")).Block(
+			jen.Id(receiver).Dot(fields.NameSpec).Dot("ReconciliationPolicy").Op("=").Id("r"),
+		)
+	}
+}
+
+func NewGetReconciliationPolicy(receiver, runtime string) New {
+	return func(f *jen.File, o types.Object) {
+		f.Commentf("GetReconciliationPolicy of this %s.", o.Name())
+		f.Func().Params(jen.Id(receiver).Op("*").Id(o.Name())).Id("GetReconciliationPolicy").Params().Op("*").Qual(runtime, "ReconciliationPolicy").Block(
+			jen.Return(jen.Id(receiver).Dot(fields.NameSpec).Dot("ReconciliationPolicy")),
+		)
+	}
+}
+
 // NewSetUsers returns a NewMethod that writes a SetUsers method for the
 // supplied Object to the supplied file.
 func NewSetUsers(receiver string) New {

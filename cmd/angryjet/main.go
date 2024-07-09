@@ -114,6 +114,8 @@ func GenerateManaged(filename, header string, p *packages.Package) error {
 		"GetPublishConnectionDetailsTo":       method.NewGetPublishConnectionDetailsTo(receiver, RuntimeImport),
 		"SetManagementPolicies":               method.NewSetManagementPolicies(receiver, RuntimeImport),
 		"GetManagementPolicies":               method.NewGetManagementPolicies(receiver, RuntimeImport),
+		"SetReconciliationPolicy":             method.NewSetReconciliationPolicy(receiver, RuntimeImport),
+		"GetReconciliationPolicy":             method.NewGetReconciliationPolicy(receiver, RuntimeImport),
 		"SetDeletionPolicy":                   method.NewSetDeletionPolicy(receiver, RuntimeImport),
 		"GetDeletionPolicy":                   method.NewGetDeletionPolicy(receiver, RuntimeImport),
 	}
